@@ -3,8 +3,12 @@
   command:
     chdir: "{{ codimd_base_path }}"
     cmd: "{{ codimd_base_path }}/bin/setup"
+  become: yes
+  become_user: "{{ codimd_user }}"
 
 - name: Run codimd build script
   command:
     chdir: "{{ codimd_base_path }}"
     cmd: "yarn run build"
+  become: yes
+  become_user: "{{ codimd_user }}"

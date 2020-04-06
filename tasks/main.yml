@@ -15,18 +15,19 @@
 - name: Download package tgz
   get_url:
     url: "{{ codimd_source }}"
-    dest: "{{ codimd_temp_path }}"
+    dest: "/tmp/codimd.tar.gz"
 
 - name: Extract package tgz
   unarchive:
-    src: "{{ codimd_temp_path }}"
+    src: "/tmp/codimd.tar.gz"
     dest: "{{ codimd_base_path }}"
     remote_src: yes
+  become: yes
   become_user: "{{ codimd_group }}"
 
 - name: Delete package tgz
   file:
-    path: "{{ codimd_temp_path }}"
+    path: "/tmp/codimd.tar.gz"
     state: absent
 
 - import_tasks: build.yml
@@ -37,6 +38,7 @@
     path: "{{ codimd_base_path }}"
     production: yes
     state: present
+  become: yes
   become_user: "{{ codimd_user }}"
   when: not codimd_build
 
