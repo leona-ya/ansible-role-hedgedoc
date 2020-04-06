@@ -1,0 +1,8 @@
+var path = require('path');
+
+module.exports = {
+    'config':          path.resolve('config.json'),
+    'migrations-path': path.resolve('lib', 'migrations'),
+    'models-path':     path.resolve('lib', 'models'),
+    'url':             '{{ codimd_db_dialect }}://{{ codimd_db_username }}:{{ codimd_db_password }}@{{ codimd_db_host }}:{{ codimd_db_port }}/{{ codimd_db_database }}'
+}

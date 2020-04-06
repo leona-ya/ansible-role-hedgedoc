@@ -1,0 +1,10 @@
+---
+- name: Run codimd setup script
+  command:
+    chdir: "{{ codimd_base_path }}"
+    cmd: "{{ codimd_base_path }}/bin/setup"
+
+- name: Run codimd build script
+  command:
+    chdir: "{{ codimd_base_path }}"
+    cmd: "yarn run build"

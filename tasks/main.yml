@@ -1,0 +1,67 @@
+---
+- name: Create group
+  group:
+    name: "{{ codimd_group }}"
+    state: present
+
+- name: Create user
+  user:
+    name: "{{ codimd_user }}"
+    group: "{{ codimd_group }}"
+    create_home: yes
+    home: "{{ codimd_base_path }}"
+    shell: "/bin/bash"
+
+- name: Download package tgz
+  get_url:
+    url: "{{ codimd_source }}"
+    dest: "{{ codimd_temp_path }}"
+
+- name: Extract package tgz
+  unarchive:
+    src: "{{ codimd_temp_path }}"
+    dest: "{{ codimd_base_path }}"
+    remote_src: yes
+  become_user: "{{ codimd_group }}"
+
+- name: Delete package tgz
+  file:
+    path: "{{ codimd_temp_path }}"
+    state: absent
+
+- import_tasks: build.yml
+  when: codimd_build
+
+- name: Install production requirements
+  npm:
+    path: "{{ codimd_base_path }}"
+    production: yes
+    state: present
+  become_user: "{{ codimd_user }}"
+  when: not codimd_build
+
+- name: Upload config.json
+  template:
+    src: "{{ codimd_config_template_path }}"
+    dest: "{{ codimd_base_path }}/config.json"
+    owner: "{{ codimd_user }}"
+    group: "{{ codimd_group }}"
+
+- name: Upload .sequelizerc
+  template:
+    src: ".sequelizerc.j2"
+    dest: "{{ codimd_base_path }}/.sequelizerc"
+    owner: "{{ codimd_user }}"
+    group: "{{ codimd_group }}"
+
+- name: Upload codimd.service
+  template:
+    src: "codimd.service"
+    dest: "/etc/systemd/system/codimd.service"
+
+- name: Enable/Start codimd service
+  systemd:
+    name: "codimd.service"
+    enabled: yes
+    daemon_reload: yes
+    state: started

@@ -1,0 +1,17 @@
+[Unit]
+Description=CodiMD
+After=network.target
+
+[Service]
+Type=exec
+RestartSec=2s
+User={{ codimd_user }}
+Group={{ codimd_group }}
+WorkingDirectory={{ codimd_base_path }}
+ExecStart=npm start --production
+Restart=always
+PrivateTmp=true
+PrivateDevices=true
+
+[Install]
+WantedBy=multi-user.target

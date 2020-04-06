@@ -1,0 +1,12 @@
+codimd_source: https://static.labcode.de/build/codimd/codimd-normal-1.6.0.tar.gz
+codimd_temp_path: /tmp/codimd.tar.gz
+codimd_base_path: /opt/codimd
+codimd_build: false
+codimd_user: codimd
+codimd_group: codimd
+codimd_db_dialect: postgres
+codimd_db_host: localhost
+codimd_db_database: codimd
+codimd_db_port: 5432
+codimd_db_username: codimd
+codimd_config_template_path: config.json.j2
