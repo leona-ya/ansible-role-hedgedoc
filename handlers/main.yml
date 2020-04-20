@@ -1,0 +1,5 @@
+---
+- name: restart systemd service
+  systemd:
+    name: "codimd.service"
+    state: restarted

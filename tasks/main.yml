@@ -48,6 +48,7 @@
     dest: "{{ codimd_base_path }}/config.json"
     owner: "{{ codimd_user }}"
     group: "{{ codimd_group }}"
+  notify: restart systemd service
 
 - name: Upload .sequelizerc
   template:
@@ -55,6 +56,7 @@
     dest: "{{ codimd_base_path }}/.sequelizerc"
     owner: "{{ codimd_user }}"
     group: "{{ codimd_group }}"
+  notify: restart systemd service
 
 - name: Upload codimd.service
   template:
