@@ -2,7 +2,7 @@
   "production": {
     "loglevel": "{{ codimd_loglevel | default('warn') }}",
     "imageUploadType": "filesystem",
-    "allowPDFExport": "{{ codimd_allow_pdf_export | default(true) }}",
+    "allowPDFExport": {{ codimd_allow_pdf_export | bool | lower }},
     "db": {
       "username": "{{ codimd_db_username }}",
       "password": "{{ codimd_db_password }}",
@@ -21,7 +21,7 @@
     "urlAddPort": false,
     "allowOrigin": "{{ codimd_allowed_origins }}",
     "hsts": {
-      "enable": "{{ codimd_hsts_enable | default(false) }}",
+      "enable": {{ codimd_hsts_enable | bool | lower }},
       "maxAgeSeconds": 31536000,
       "includeSubDomains": true,
       "preload": true
@@ -34,16 +34,16 @@
         "fontSrc": "{{ codimd_domain }}"
       },
       "upgradeInsecureRequests": "auto",
-      "addDefaults": "{{ codimd_csp_enable | default(true) }}"
+      "addDefaults": {{ codimd_csp_enable | bool | lower }}
     },
-    "allowAnonymous": "{{ codimd_allow_anonymous | default(true) }}",
-    "allowAnonymousEdits": "{{ codimd_allow_anonymous_edits | default(true) }}",
-    "allowFreeURL": "{{ codimd_allow_free_url | default(true) }}",
+    "allowAnonymous": {{ codimd_allow_anonymous | bool | lower }},
+    "allowAnonymousEdits": {{ codimd_allow_anonymous_edits | bool | lower }},
+    "allowFreeURL": {{ codimd_allow_free_url | bool | lower }},
     "defaultPermission": "editable",
     "sessionLife": 1209600000,
     "sessionSecret": "{{ codimd_session_secret }}",
-    "email": true,
-    "allowEmailRegister": "{{ codimd_allow_email_register | default(true) }}"
+    "email": {{ codimd_allow_email_login | bool | lower }},
+    "allowEmailRegister": {{ codimd_allow_email_register | bool | lower  }}
     {% if codimd_saml is defined %},
     "saml": {
       "issuer": "{{ codimd_saml.issuer }}",

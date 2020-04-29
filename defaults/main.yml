@@ -10,3 +10,11 @@ codimd_db_database: codimd
 codimd_db_port: 5432
 codimd_db_username: codimd
 codimd_config_template_path: config.json.j2
+codimd_allow_email_login: true
+codimd_allow_email_register: true
+codimd_allow_free_url: true
+codimd_allow_anonymous_edits: true
+codimd_allow_anonymous: true
+codimd_csp_enable: true
+codimd_hsts_enable: true
+codimd_allow_pdf_export: true
