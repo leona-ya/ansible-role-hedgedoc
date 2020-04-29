@@ -44,5 +44,14 @@
     "sessionSecret": "{{ codimd_session_secret }}",
     "email": true,
     "allowEmailRegister": "{{ codimd_allow_email_register | default(true) }}"
+    {% if codimd_saml is defined %},
+    "saml": {
+      "issuer": "{{ codimd_saml.issuer }}",
+      "identifierFormat": "{{ codimd_saml.identifierFormat | default('urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified') }}",
+      "idpSsoUrl": "{{ codimd_saml.idpSSOUrl }}",
+      "idpCert": "{{ codimd_saml.idpCertPath | default(codimd_base_path + '/idp_cert.pem') }}",
+      "attribute": {{ codimd_saml.attributes | default({}) | to_nice_json }}
+    }
+    {% endif %}
   }
 }

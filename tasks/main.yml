@@ -63,6 +63,12 @@
     src: "codimd.service"
     dest: "/etc/systemd/system/codimd.service"
 
+- name: Upload saml cert
+  copy:
+    dest: "{{ codimd_saml.idpCertPath | default(codimd_base_path + '/idp_cert.pem') }}"
+    content: "{{ codimd_saml.idpCert }}"
+  when: codimd_saml is defined
+
 - name: Enable/Start codimd service
   systemd:
     name: "codimd.service"
