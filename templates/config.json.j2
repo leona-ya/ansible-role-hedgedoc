@@ -1,7 +1,7 @@
 {
   "production": {
     "loglevel": "{{ codimd_loglevel | default('warn') }}",
-    "imageUploadType": "filesystem",
+    "imageUploadType": "{{ codimd_upload_type }}",
     "allowPDFExport": {{ codimd_allow_pdf_export | bool | lower }},
     "db": {
       "username": "{{ codimd_db_username }}",
@@ -43,8 +43,7 @@
     "sessionLife": 1209600000,
     "sessionSecret": "{{ codimd_session_secret }}",
     "email": {{ codimd_allow_email_login | bool | lower }},
-    "allowEmailRegister": {{ codimd_allow_email_register | bool | lower  }}
-    {% if codimd_saml is defined %},
+    "allowEmailRegister": {{ codimd_allow_email_register | bool | lower  }}{% if codimd_saml is defined %},
     "saml": {
       "issuer": "{{ codimd_saml.issuer }}",
       "identifierFormat": "{{ codimd_saml.identifierFormat | default('urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified') }}",
@@ -52,6 +51,8 @@
       "idpCert": "{{ codimd_saml.idpCertPath | default(codimd_base_path + '/idp_cert.pem') }}",
       "attribute": {{ codimd_saml.attributes | default({}) | to_nice_json }}
     }
-    {% endif %}
+{% endif %}{% if codimd_additional_config is defined %},
+    {{ codimd_additional_config }}
+{% endif %}
   }
 }

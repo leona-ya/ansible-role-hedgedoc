@@ -18,3 +18,4 @@ codimd_allow_anonymous: true
 codimd_csp_enable: true
 codimd_hsts_enable: true
 codimd_allow_pdf_export: true
+codimd_upload_type: "filesystem"
