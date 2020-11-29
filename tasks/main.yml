@@ -1,77 +1,29 @@
 ---
 - name: Create group
   group:
-    name: "{{ codimd_group }}"
+    name: "{{ hedgedoc_group }}"
     state: present
 
 - name: Create user
   user:
-    name: "{{ codimd_user }}"
-    group: "{{ codimd_group }}"
+    name: "{{ hedgedoc_user }}"
+    group: "{{ hedgedoc_group }}"
     create_home: yes
-    home: "{{ codimd_base_path }}"
-    shell: "/bin/bash"
+    home: "{{ hedgedoc_base_path }}"
+    shell: "/bin/false"
+    system: yes
 
-- name: Download package tgz
-  get_url:
-    url: "{{ codimd_source }}"
-    dest: "/tmp/codimd.tar.gz"
+- import_tasks: "install.yml"
+- import_tasks: "config.yml"
 
-- name: Extract package tgz
-  unarchive:
-    src: "/tmp/codimd.tar.gz"
-    dest: "{{ codimd_base_path }}"
-    remote_src: yes
-  become: yes
-  become_user: "{{ codimd_group }}"
-
-- name: Delete package tgz
-  file:
-    path: "/tmp/codimd.tar.gz"
-    state: absent
-
-- import_tasks: build.yml
-  when: codimd_build
-
-- name: Install production requirements
-  npm:
-    path: "{{ codimd_base_path }}"
-    production: yes
-    state: present
-  become: yes
-  become_user: "{{ codimd_user }}"
-  when: not codimd_build
-
-- name: Upload config.json
+- name: Upload hedgedoc.service
   template:
-    src: "{{ codimd_config_template_path }}"
-    dest: "{{ codimd_base_path }}/config.json"
-    owner: "{{ codimd_user }}"
-    group: "{{ codimd_group }}"
-  notify: restart systemd service
+    src: "hedgedoc.service"
+    dest: "/etc/systemd/system/hedgedoc.service"
 
-- name: Upload .sequelizerc
-  template:
-    src: ".sequelizerc.j2"
-    dest: "{{ codimd_base_path }}/.sequelizerc"
-    owner: "{{ codimd_user }}"
-    group: "{{ codimd_group }}"
-  notify: restart systemd service
-
-- name: Upload codimd.service
-  template:
-    src: "codimd.service"
-    dest: "/etc/systemd/system/codimd.service"
-
-- name: Upload saml cert
-  copy:
-    dest: "{{ codimd_saml.idpCertPath | default(codimd_base_path + '/idp_cert.pem') }}"
-    content: "{{ codimd_saml.idpCert }}"
-  when: codimd_saml is defined
-
-- name: Enable/Start codimd service
+- name: Enable/Start hedgedoc service
   systemd:
-    name: "codimd.service"
+    name: "hedgedoc.service"
     enabled: yes
     daemon_reload: yes
     state: started

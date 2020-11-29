@@ -1,13 +1,13 @@
 [Unit]
-Description=CodiMD
+Description=hedgedoc
 After=network.target
 
 [Service]
 Type=exec
 RestartSec=2s
-User={{ codimd_user }}
-Group={{ codimd_group }}
-WorkingDirectory={{ codimd_base_path }}
+User={{ hedgedoc_user }}
+Group={{ hedgedoc_group }}
+WorkingDirectory={{ hedgedoc_base_path }}
 ExecStart=/usr/bin/env npm start --production
 Restart=always
 PrivateTmp=true

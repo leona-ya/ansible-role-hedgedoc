@@ -1,21 +1,26 @@
-codimd_source: https://static.labcode.de/build/codimd/codimd-normal-1.6.0.tar.gz
-codimd_temp_path: /tmp/codimd.tar.gz
-codimd_base_path: /opt/codimd
-codimd_build: false
-codimd_user: codimd
-codimd_group: codimd
-codimd_db_dialect: postgres
-codimd_db_host: localhost
-codimd_db_database: codimd
-codimd_db_port: 5432
-codimd_db_username: codimd
-codimd_config_template_path: config.json.j2
-codimd_allow_email_login: true
-codimd_allow_email_register: true
-codimd_allow_free_url: true
-codimd_allow_anonymous_edits: true
-codimd_allow_anonymous: true
-codimd_csp_enable: true
-codimd_hsts_enable: true
-codimd_allow_pdf_export: true
-codimd_upload_type: "filesystem"
+hedgedoc_version: 1.7.0-rc1
+hedgedoc_source: https://github.com/hedgedoc/hedgedoc/releases/download/{{ hedgedoc_version }}/hedgedoc-{{ hedgedoc_version }}.tar.gz
+
+hedgedoc_base_path: /opt/hedgedoc
+
+hedgedoc_user: hedgedoc
+hedgedoc_group: hedgedoc
+
+hedgedoc_db_dialect: postgres
+hedgedoc_db_host: localhost
+hedgedoc_db_database: hedgedoc
+hedgedoc_db_port: 5432
+hedgedoc_db_username: hedgedoc
+
+hedgedoc_config_template_path: config.json.j2
+
+hedgedoc_allow_email_login: true
+hedgedoc_allow_email_register: true
+hedgedoc_allow_free_url: true
+hedgedoc_allow_anonymous_edits: true
+hedgedoc_allow_anonymous: true
+
+hedgedoc_csp_enable: true
+hedgedoc_hsts_enable: true
+hedgedoc_allow_pdf_export: true
+hedgedoc_upload_type: "filesystem"

@@ -1,0 +1,16 @@
+---
+- name: Upload config.json
+  template:
+    src: "{{ hedgedoc_config_template_path }}"
+    dest: "{{ hedgedoc_base_path }}/config.json"
+    owner: "{{ hedgedoc_user }}"
+    group: "{{ hedgedoc_group }}"
+  notify: restart systemd service
+
+- name: Upload .sequelizerc
+  template:
+    src: ".sequelizerc.j2"
+    dest: "{{ hedgedoc_base_path }}/.sequelizerc"
+    owner: "{{ hedgedoc_user }}"
+    group: "{{ hedgedoc_group }}"
+  notify: restart systemd service

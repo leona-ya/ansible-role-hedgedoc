@@ -1,0 +1,37 @@
+---
+- name: Check if file with current installed version exists
+  stat:
+    path: "{{ hedgedoc_base_path }}/VERSION"
+  register: stat_version_file
+
+- name: Get content of file with current installed version
+  slurp:
+    src: "{{ hedgedoc_base_path }}/VERSION"
+  register: slurp_version_file
+  when: stat_version_file.stat.exists
+
+- block:
+  - name: Extract package tgz
+    unarchive:
+      src: "{{ hedgedoc_source }}"
+      dest: "{{ hedgedoc_base_path }}"
+      remote_src: yes
+      extra_opts: [--strip-components=1]
+    become: yes
+    become_user: "{{ hedgedoc_user }}"
+
+  - name: Run hedgedoc setup script
+    command:
+      chdir: "{{ hedgedoc_base_path }}"
+      cmd: "{{ hedgedoc_base_path }}/bin/setup"
+    become: yes
+    become_user: "{{ hedgedoc_user }}"
+
+  - name: Create file for saving current installed version
+    copy:
+      content: "{{ hedgedoc_version }}"
+      dest: "{{ hedgedoc_base_path }}/VERSION"
+      owner: "{{ hedgedoc_user }}"
+      group: "{{ hedgedoc_group }}"
+
+  when: (not stat_version_file.stat.exists) or (slurp_version_file.content | b64decode != hedgedoc_version)

@@ -1,27 +1,27 @@
 {
   "production": {
-    "loglevel": "{{ codimd_loglevel | default('warn') }}",
-    "imageUploadType": "{{ codimd_upload_type }}",
-    "allowPDFExport": {{ codimd_allow_pdf_export | bool | lower }},
+    "loglevel": "{{ hedgedoc_loglevel | default('warn') }}",
+    "imageUploadType": "{{ hedgedoc_upload_type }}",
+    "allowPDFExport": {{ hedgedoc_allow_pdf_export | bool | lower }},
     "db": {
-      "username": "{{ codimd_db_username }}",
-      "password": "{{ codimd_db_password }}",
-      "database": "{{ codimd_db_database }}",
-      "host": "{{ codimd_db_host }}",
-      "port": "{{ codimd_db_port }}",
-      "dialect": "{{ codimd_db_dialect }}"
+      "username": "{{ hedgedoc_db_username }}",
+      "password": "{{ hedgedoc_db_password }}",
+      "database": "{{ hedgedoc_db_database }}",
+      "host": "{{ hedgedoc_db_host }}",
+      "port": "{{ hedgedoc_db_port }}",
+      "dialect": "{{ hedgedoc_db_dialect }}"
     },
     "tmpPath": "/tmp/",
     "docsPath": "./public/docs",
     "viewPath": "./public/views",
     "uploadsPath": "./public/uploads",
-    "domain": "{{ codimd_domain }}",
-    "port": "{{ codimd_port }}",
+    "domain": "{{ hedgedoc_domain }}",
+    "port": "{{ hedgedoc_port }}",
     "protocolUseSSL": true,
     "urlAddPort": false,
-    "allowOrigin": "{{ codimd_allowed_origins }}",
+    "allowOrigin": "{{ hedgedoc_allowed_origins }}",
     "hsts": {
-      "enable": {{ codimd_hsts_enable | bool | lower }},
+      "enable": {{ hedgedoc_hsts_enable | bool | lower }},
       "maxAgeSeconds": 31536000,
       "includeSubDomains": true,
       "preload": true
@@ -29,30 +29,22 @@
     "csp": {
       "enable": true,
       "directives": {
-        "scriptSrc": "{{ codimd_domain }}",
-        "styleSrc": "{{ codimd_domain }}",
-        "fontSrc": "{{ codimd_domain }}"
+        "scriptSrc": "{{ hedgedoc_domain }}",
+        "styleSrc": "{{ hedgedoc_domain }}",
+        "fontSrc": "{{ hedgedoc_domain }}"
       },
       "upgradeInsecureRequests": "auto",
-      "addDefaults": {{ codimd_csp_enable | bool | lower }}
+      "addDefaults": {{ hedgedoc_csp_enable | bool | lower }}
     },
-    "allowAnonymous": {{ codimd_allow_anonymous | bool | lower }},
-    "allowAnonymousEdits": {{ codimd_allow_anonymous_edits | bool | lower }},
-    "allowFreeURL": {{ codimd_allow_free_url | bool | lower }},
+    "allowAnonymous": {{ hedgedoc_allow_anonymous | bool | lower }},
+    "allowAnonymousEdits": {{ hedgedoc_allow_anonymous_edits | bool | lower }},
+    "allowFreeURL": {{ hedgedoc_allow_free_url | bool | lower }},
     "defaultPermission": "editable",
     "sessionLife": 1209600000,
-    "sessionSecret": "{{ codimd_session_secret }}",
-    "email": {{ codimd_allow_email_login | bool | lower }},
-    "allowEmailRegister": {{ codimd_allow_email_register | bool | lower  }}{% if codimd_saml is defined %},
-    "saml": {
-      "issuer": "{{ codimd_saml.issuer }}",
-      "identifierFormat": "{{ codimd_saml.identifierFormat | default('urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified') }}",
-      "idpSsoUrl": "{{ codimd_saml.idpSSOUrl }}",
-      "idpCert": "{{ codimd_saml.idpCertPath | default(codimd_base_path + '/idp_cert.pem') }}",
-      "attribute": {{ codimd_saml.attributes | default({}) | to_nice_json }}
-    }
-{% endif %}{% if codimd_additional_config is defined %},
-    {{ codimd_additional_config }}
+    "sessionSecret": "{{ hedgedoc_session_secret }}",
+    "email": {{ hedgedoc_allow_email_login | bool | lower }},
+    "allowEmailRegister": {{ hedgedoc_allow_email_register | bool | lower  }}{% if hedgedoc_additional_config is defined %},
+    {{ hedgedoc_additional_config }}
 {% endif %}
   }
 }
