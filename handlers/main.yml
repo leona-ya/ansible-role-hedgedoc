@@ -1,5 +1,5 @@
 ---
-- name: restart systemd service
+- name: restart hedgedoc
   systemd:
     name: "hedgedoc.service"
     state: restarted
