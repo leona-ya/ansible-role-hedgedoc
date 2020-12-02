@@ -13,6 +13,13 @@
     shell: "/bin/false"
     system: yes
 
+- name: Install requirements
+  package:
+    name:
+      - sudo
+      - git
+    state: present
+
 - import_tasks: "install.yml"
 - import_tasks: "config.yml"
 

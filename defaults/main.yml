@@ -1,18 +1,27 @@
-hedgedoc_version: 1.7.0-rc1
-hedgedoc_source: https://github.com/hedgedoc/hedgedoc/releases/download/{{ hedgedoc_version }}/hedgedoc-{{ hedgedoc_version }}.tar.gz
+---
+hedgedoc_version: "1.7.0-rc1"
+hedgedoc_source: "https://github.com/hedgedoc/hedgedoc/releases/download/{{ hedgedoc_version }}/hedgedoc-{{ hedgedoc_version }}.tar.gz"
 
-hedgedoc_base_path: /opt/hedgedoc
+hedgedoc_base_path: "/opt/hedgedoc"
 
-hedgedoc_user: hedgedoc
-hedgedoc_group: hedgedoc
+hedgedoc_user: "hedgedoc"
+hedgedoc_group: "hedgedoc"
 
-hedgedoc_db_dialect: postgres
-hedgedoc_db_host: localhost
-hedgedoc_db_database: hedgedoc
-hedgedoc_db_port: 5432
-hedgedoc_db_username: hedgedoc
+hedgedoc_loglevel: "warn"
 
-hedgedoc_config_template_path: config.json.j2
+hedgedoc_db_dialect: "postgres"
+hedgedoc_db_host: "localhost"
+hedgedoc_db_username: "hedgedoc"
+hedgedoc_db_password: ""
+hedgedoc_db_database: "hedgedoc"
+hedgedoc_db_port: "5432"
+hedgedoc_db_storage: ""
+
+hedgedoc_allowed_origins: [
+  "{{ hedgedoc_domain }}"
+]
+hedgedoc_port: 3000
+hedgedoc_upload_type: "filesystem"
 
 hedgedoc_allow_email_login: true
 hedgedoc_allow_email_register: true
@@ -22,5 +31,3 @@ hedgedoc_allow_anonymous: true
 
 hedgedoc_csp_enable: true
 hedgedoc_hsts_enable: true
-hedgedoc_allow_pdf_export: true
-hedgedoc_upload_type: "filesystem"

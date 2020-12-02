@@ -1,15 +1,15 @@
 {
   "production": {
-    "loglevel": "{{ hedgedoc_loglevel | default('warn') }}",
+    "loglevel": "{{ hedgedoc_loglevel }}",
     "imageUploadType": "{{ hedgedoc_upload_type }}",
-    "allowPDFExport": {{ hedgedoc_allow_pdf_export | bool | lower }},
     "db": {
       "username": "{{ hedgedoc_db_username }}",
       "password": "{{ hedgedoc_db_password }}",
       "database": "{{ hedgedoc_db_database }}",
       "host": "{{ hedgedoc_db_host }}",
       "port": "{{ hedgedoc_db_port }}",
-      "dialect": "{{ hedgedoc_db_dialect }}"
+      "dialect": "{{ hedgedoc_db_dialect }}",
+      "storage": "{{ hedgedoc_db_storage }}"
     },
     "tmpPath": "/tmp/",
     "docsPath": "./public/docs",
@@ -27,14 +27,14 @@
       "preload": true
     },
     "csp": {
-      "enable": true,
+      "enable": {{ hedgedoc_csp_enable | bool | lower }},
       "directives": {
         "scriptSrc": "{{ hedgedoc_domain }}",
         "styleSrc": "{{ hedgedoc_domain }}",
         "fontSrc": "{{ hedgedoc_domain }}"
       },
       "upgradeInsecureRequests": "auto",
-      "addDefaults": {{ hedgedoc_csp_enable | bool | lower }}
+      "addDefaults": true
     },
     "allowAnonymous": {{ hedgedoc_allow_anonymous | bool | lower }},
     "allowAnonymousEdits": {{ hedgedoc_allow_anonymous_edits | bool | lower }},

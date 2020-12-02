@@ -1,7 +1,7 @@
 ---
 - name: Upload config.json
   template:
-    src: "{{ hedgedoc_config_template_path }}"
+    src: "config.json.j2"
     dest: "{{ hedgedoc_base_path }}/config.json"
     owner: "{{ hedgedoc_user }}"
     group: "{{ hedgedoc_group }}"
