@@ -19,6 +19,7 @@
       extra_opts: [--strip-components=1]
     become: yes
     become_user: "{{ hedgedoc_user }}"
+    notify: restart hedgedoc
 
   - name: Run hedgedoc setup script
     command:
