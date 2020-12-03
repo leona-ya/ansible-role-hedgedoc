@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: hedgedoc
   author: Leo 'em0lar' Maroni
   description: Ansible role for installing and configuring HedgeDoc without Docker
   # company: your company (optional)
