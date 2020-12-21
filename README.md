@@ -28,9 +28,8 @@ Ansible role for installing and configuring HedgeDoc without Docker
 ### General (optional)
 | Variable Name | Function | default | comment |
 | ------------- | -------- | ------- | ------- |
-| `hedgedoc_version` | Version of HedgeDoc that will be installed | `1.7.0-rc2` | |
-| `hedgedoc_source` | Version of HedgeDoc that will be installed | `https://github.com/hedgedoc/hedgedoc/releases/download/{{ hedgedoc_version }}/hedgedoc-{{ hedgedoc_version }}.tar.gz` | |
-| `hedgedoc_source` | Version of HedgeDoc that will be installed | `https://github.com/hedgedoc/hedgedoc/releases/download/{{ hedgedoc_version }}/hedgedoc-{{ hedgedoc_version }}.tar.gz` | |
+| `hedgedoc_version` | Version of HedgeDoc that will be installed | `1.7.0` | |
+| `hedgedoc_source` | Path to pre-compiled HedgeDoc archive | `https://github.com/hedgedoc/hedgedoc/releases/download/{{ hedgedoc_version }}/hedgedoc-{{ hedgedoc_version }}.tar.gz` | |
 | `hedgedoc_base_path` | Base path of HedgeDoc installation | `/opt/hedgedoc` | |
 | `hedgedoc_user` | Linux user that will be used/created for HedgeDoc | `hedgedoc` | |
 | `hedgedoc_group` | Linux main group for the user specified in `hedgedoc_user` | `hedgedoc` | |
