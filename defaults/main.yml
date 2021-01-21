@@ -30,4 +30,5 @@ hedgedoc_allow_anonymous_edits: true
 hedgedoc_allow_anonymous: true
 
 hedgedoc_csp_enable: true
+hedgedoc_ssl_enable: true
 hedgedoc_hsts_enable: true
