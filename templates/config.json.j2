@@ -17,7 +17,7 @@
     "uploadsPath": "./public/uploads",
     "domain": "{{ hedgedoc_domain }}",
     "port": "{{ hedgedoc_port }}",
-    "protocolUseSSL": true,
+    "protocolUseSSL": {{ hedgedoc_ssl_enable | bool | lower }},
     "urlAddPort": false,
     "allowOrigin": "{{ hedgedoc_allowed_origins }}",
     "hsts": {
