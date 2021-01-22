@@ -1,5 +1,5 @@
 ---
-hedgedoc_version: "1.7.1"
+hedgedoc_version: "1.7.2"
 hedgedoc_source: "https://github.com/hedgedoc/hedgedoc/releases/download/{{ hedgedoc_version }}/hedgedoc-{{ hedgedoc_version }}.tar.gz"
 
 hedgedoc_base_path: "/opt/hedgedoc"
